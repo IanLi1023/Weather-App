@@ -8,6 +8,7 @@ $(document).ready(function () {
   const apiKey = '431dd6371869dd989989366774b6e8c7';
   let searchHistory = new Array();
   let localStorageHistory = localStorage.getItem('weather-app-history');
+
   if(localStorageHistory === null
       || localStorageHistory == null  || localStorageHistory == undefined || localStorageHistory.length == 0){
     localStorage.setItem('weather-app-history', searchHistory);
@@ -15,13 +16,6 @@ $(document).ready(function () {
   else {
     searchHistory = JSON.parse(localStorage.getItem('weather-app-history'));
   }
-
-  /*if (localStorage.getItem('weather-app-history') !== null || localStorage.getItem('weather-app-history') !== ""){
-    console.log(JSON.parse(localStorage.getItem('weather-app-history')));
-  }
-  else {
-    localStorage.setItem('weather-app-history', searchHistory);
-  }*/
 
   const printSearchedCities = function (cityInput) {
     getApiWeather(cityInput);
@@ -171,8 +165,6 @@ function display5days(searchValue) {
 }
 
 })
-
-  //Create a local storage
 
 
 
