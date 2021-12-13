@@ -1,0 +1,12 @@
+#get-the-weather-btn, #clear-history-btn {
+    margin-left: 22px;
+}
+
+#city-input {
+    margin-left: 10px;
+}
+
+#city-name {
+    margin-left: 60px;
+    font-weight: bolder;
+}
