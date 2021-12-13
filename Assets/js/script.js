@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+//Global Variables
   let successResult = false;
   const clearHistoryEl = $('#clear-history-btn');
   const formEl = $('#city-search');
@@ -9,6 +9,7 @@ $(document).ready(function () {
   let searchHistory = new Array();
   let localStorageHistory = localStorage.getItem('weather-app-history');
 
+//Local Storage
   if(localStorageHistory === null
       || localStorageHistory == null  || localStorageHistory == undefined || localStorageHistory.length == 0){
     localStorage.setItem('weather-app-history', searchHistory);
@@ -23,7 +24,7 @@ $(document).ready(function () {
 
   console.log(searchHistory);
   
-
+//User's Search history of cities and printed on page
   const loadSearchHistory = function(){
     for (let index in searchHistory){
       let cityInput = searchHistory[index];
@@ -38,6 +39,7 @@ $(document).ready(function () {
   }
   loadSearchHistory();
 
+  //Form function after user searches for city
   const handleFormSubmit = function (event) {
     event.preventDefault();
     
@@ -67,6 +69,7 @@ $(document).ready(function () {
   }
 console.log(cityInputEl.val())
 
+//Adds searched city into searched history
 const AddToHistory = function(cityInput){
   if(!searchHistory.includes(cityInput)){
     let citySearchedEl = $('<div id="city-' + cityInput + '"></div>');
@@ -87,6 +90,7 @@ const AddToHistory = function(cityInput){
   }
 }
 
+//Calls API for current day forcast and puts information on the page
 function displayOneDay(data) {
     let date = new Date(data.dt*1000)
     let dateString = (date.getMonth()+1)+ "/" + date.getDate() + "/"+ date.getFullYear();
@@ -106,7 +110,7 @@ function displayOneDay(data) {
     <p id='5-day-forecast'></p>
     `)
 }
-
+//Calls API for UV Index and puts information on the page
 function getUVIndex(lat, lon) {
   const requestUrl = `http://api.openweathermap.org/data/2.5/uvi?&lat=${lat}&lon=${lon}&appid=${apiKey}`
   $.ajax({ url: requestUrl, method: 'GET' }).then(function (response) {
@@ -125,6 +129,7 @@ function getUVIndex(lat, lon) {
     })
 }
 
+//Clears history from page
 function ClearHistory(){
   localStorage.removeItem("weather-app-history")
   searchHistory = new Array();
@@ -132,6 +137,7 @@ function ClearHistory(){
 }
 clearHistoryEl.on('click', ClearHistory);
 
+//Calls API for 5-day-forecast and puts information on the page
 function display5days(searchValue) {
   const requestUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchValue}&units=imperial&appid=${apiKey}`
   $.ajax({ url: requestUrl, method: 'GET' }).then(function (response) {
